@@ -64,6 +64,29 @@ export async function getStockById(id:string){
     }
 }
 
+//stock completo
+export async function getAllStocks(){
+    try{
+        const stocks = await prisma.stock.findMany()
+
+        return stocks
+    }catch (error){
+        console.error(error)
+    }
+}
+
+//deletar registro de estoque por id
+
+export async function  deleteStock(id:string){
+    try{
+        const stock = await prisma.stock.delete({
+            where:{id},
+        })
+        return stock
+    }catch (error){
+        console.error(error)
+    }
+}
 
 
 
