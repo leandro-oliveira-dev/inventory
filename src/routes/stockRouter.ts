@@ -3,10 +3,6 @@ import * as stockController from '../controllers/stockController'
 import { isErrored } from "stream";
 
 
-interface CustomerError extends Error{
-    code? : number;
-}
-
 const router = Router();
 
 router.post('/stocks/create', async (req, res) => {
@@ -22,7 +18,7 @@ router.post('/stocks/create', async (req, res) => {
     }
 })
 
-router.put('/stocks/:id', async (req, res)=>{
+router.put('/stocks/update/:id', async (req, res)=>{
     try {
         // const data:any = req.query
         const stock = await stockController.updateStock(req.params.id,req.body)
@@ -57,7 +53,7 @@ router.get('/stocks',async(req , res)=> {
     }
 })
 
-router.delete('/stocks/:id',async (req ,res)=>{
+router.delete('/stocks/delete/:id',async (req ,res)=>{
     try{
         const stock = await stockController.deleteStock(req.params.id);
         res.status(200).json(stock);
