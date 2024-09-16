@@ -9,7 +9,7 @@ interface CustomerError extends Error{
 
 const router = Router();
 
-router.post('/stocks', async (req, res) => {
+router.post('/stocks/create', async (req, res) => {
     try {
 
         const stock = await stockController.createStock(req.body);
@@ -50,7 +50,7 @@ router.get('/stock/:id',async(req ,res)=>{
 router.get('/stocks',async(req , res)=> {
     try{
         const stock = await stockController.getAllStocks();
-        res.json(stock);
+        res.status(200).json(stock);
     }catch(error){
 
      res.status(500).json({error});      
@@ -60,6 +60,7 @@ router.get('/stocks',async(req , res)=> {
 router.delete('/stocks/:id',async (req ,res)=>{
     try{
         const stock = await stockController.deleteStock(req.params.id);
+        res.status(200).json(stock);
     }catch(error){
         res.status(500).json({error}); 
     }
